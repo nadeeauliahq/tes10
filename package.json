@@ -3,7 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node app.js"
+  "postinstall": "npm install mysql2",
+  "start": "node app.js"
+
+
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
