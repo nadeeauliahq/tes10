@@ -1,3 +1,10 @@
+const express = require('express');
+const router = express.Router();
+const { Report, Production } = require('../models');
+const { authenticate, authorize } = require('../middleware/auth');
+const { Op } = require('sequelize');
+
+// Membuat laporan kebutuhan produk
 router.post('/make', authenticate, authorize(['pegawai', 'admin']), async (req, res, next) => {
     try {
         const { namalaporan, productType, startperiod, endperiod } = req.body;
@@ -30,6 +37,7 @@ router.post('/make', authenticate, authorize(['pegawai', 'admin']), async (req, 
     }
 });
 
+// Mendapatkan laporan kebutuhan produk dengan rentang waktu
 router.get('/view', authenticate, authorize(['manager', 'admin']), async (req, res, next) => {
     try {
         const { namalaporan, productType, startperiod, endperiod } = req.query;
@@ -74,3 +82,5 @@ router.get('/view', authenticate, authorize(['manager', 'admin']), async (req, r
         next(err);
     }
 });
+
+module.exports = router;
